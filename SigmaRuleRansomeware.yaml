@@ -1,0 +1,36 @@
+title: Ransomware Sample Detection
+description: This rule detects the execution of ransomware samples based on specific file names and processes.
+author: OpenAI
+reference: https://www.us-cert.gov/ncas/alerts/aa20-302a
+date: 2021-12-04
+logsource:
+  product: windows
+  service: security
+  definition: Security events include all events in the "Security" log, including "Audit Success" and "Audit Failure" events.
+condition:
+  any of them:
+    - file_name: '*wannacry*'
+    - file_name: '*cerber*'
+    - file_name: '*locky*'
+    - file_name: '*zepto*'
+    - file_name: '*cryptowall*'
+    - file_name: '*cryptolocker*'
+    - process_name: '*tor*'
+    - process_name: '*bitcoin*'
+    - process_name: '*bit*'
+    - process_name: '*money*'
+    - process_name: '*crypto*'
+    - process_name: '*bitlocker*'
+    - process_name: '*locker*'
+
+fields:
+  - process_name
+  - process_path
+  - file_name
+  - file_path
+  - username
+  - user_id
+  - user_sid
+
+tags:
+  - attack.ransomware
