@@ -32,3 +32,8 @@ This rule uses the file_name and process_name fields to match specific strings t
 
 You can customize and expand this rule to meet your specific needs and requirements. For example, you can add more strings and patterns, use different fields and operators, set different thresholds and conditions, and add more tags and outputs. You can also use this rule as a starting point and build more advanced and sophisticated rules that can detect ransomeware samples and other threats based on different indicators and behaviors.
 
+##Gitlab Secret Finder
+This script uses the gitlab library to authenticate to the GitLab API, and to access and search the repository's files and content. The script uses the re library to match the secret pattern in the file content, and then prints the secret file path and content to the console.
+
+You can customize and expand this script to meet your specific needs and requirements. For example, you can set different access tokens, URLs, patterns, repository names, branch names, and output formats. You can also use this script as a starting point and build more advanced and sophisticated secrets scanners that can scan and search different types of secrets in different GitLab repositories and branches.
+
