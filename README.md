@@ -24,3 +24,9 @@ ChatGPT Input : write python script that scan a sample gitlab project with sast 
 This script will clone the sample GitLab project, scan it with a specified SAST SCA scanner, parse the output, and create a product, engagement, test, and finding in DefectDojo. It will then print the finding that was created in DefectDojo.
 
 You can customize and expand this script to meet your specific needs and requirements. For example, you can add more scanners, options, and output formats, handle different types of responses and errors, generate reports, and integrate the scanner into your existing workflow.
+
+##SigmaRule for Ransomeware
+This rule uses the file_name and process_name fields to match specific strings that are commonly associated with ransomeware samples. If a match is found, the rule triggers an alert and includes information about the process and file names, paths, and user details in the alert. The rule also tags the alert with the attack.ransomware tag for easy identification and filtering.
+
+You can customize and expand this rule to meet your specific needs and requirements. For example, you can add more strings and patterns, use different fields and operators, set different thresholds and conditions, and add more tags and outputs. You can also use this rule as a starting point and build more advanced and sophisticated rules that can detect ransomeware samples and other threats based on different indicators and behaviors.
+
