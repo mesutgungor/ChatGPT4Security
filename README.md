@@ -1,4 +1,4 @@
-# ChatGPT4Security Chat4GPT Experiments for Security
+# ChatGPT4Security
 
 ## Sample Security Lab Ansible Playbook
 
