@@ -15,3 +15,12 @@ You will need to modify the code to fit your specific needs and environment. For
 This script will crawl the website, following links and forms, and perform a variety of tests using different payloads to look for XSS vulnerabilities. It will then print the vulnerabilities that it finds, including the URL, parameter, and payload that was used to exploit the vulnerability.
 
 You can customize and expand this script to meet your specific needs and requirements. For example, you can add more payloads and tests, handle different types of responses and HTTP methods, generate reports, and integrate the scanner into your existing workflow.
+
+## Python SAST and Defectdojo 
+
+ChatGPT Input : write python script that scan a sample gitlab project with sast sca scanner and outputs results to defect dojo
+
+
+This script will clone the sample GitLab project, scan it with a specified SAST SCA scanner, parse the output, and create a product, engagement, test, and finding in DefectDojo. It will then print the finding that was created in DefectDojo.
+
+You can customize and expand this script to meet your specific needs and requirements. For example, you can add more scanners, options, and output formats, handle different types of responses and errors, generate reports, and integrate the scanner into your existing workflow.
