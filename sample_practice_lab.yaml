@@ -1,0 +1,209 @@
+---
+# This playbook installs the ELK stack, Kali Linux, DVWA, mod_security, and forwards DVWA logs to the ELK stack
+
+- name: Install the ELK stack
+  hosts: all
+  become: true
+  vars:
+    elasticsearch_version: 7.9
+    kibana_version: 7.9
+    logstash_version: 7.9
+  tasks:
+    # Install the required packages
+    - name: Install the required packages
+      apt:
+        name:
+          - openjdk-11-jre
+          - apt-transport-https
+          - wget
+        state: present
+
+    # Install Elasticsearch
+    - name: Install Elasticsearch
+      elasticsearch_plugin:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - analysis-icu
+        - analysis-phonetic
+        - analysis-kuromoji
+        - analysis-smartcn
+        - analysis-stempel
+        - repository-s3
+        - repository-gcs
+      when: ansible_os_family == 'Debian'
+      
+         - name: Add the Elasticsearch APT repository
+      apt_repository:
+        repo: "deb https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/apt stable main"
+        state: present
+        update_cache: yes
+        key_url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+    - name: Install Elasticsearch
+      apt:
+        name: elasticsearch
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Configure Elasticsearch
+    - name: Configure Elasticsearch
+      template:
+        src: elasticsearch.yml.j2
+        dest: /etc/elasticsearch/elasticsearch.yml
+        mode: 0644
+      notify: restart elasticsearch
+
+    # Start Elasticsearch
+    - name: Start Elasticsearch
+      service:
+        name: elasticsearch
+        state: started
+        enabled: yes
+
+    # Install Kibana
+    - name: Install Kibana
+      apt:
+        name: kibana
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Configure Kibana
+    - name: Configure Kibana
+      template:
+        src: kibana.yml.j2
+        dest: /etc/kibana/kibana.yml
+        mode: 0644
+      notify: restart kibana
+
+    # Start Kibana
+    - name: Start Kibana
+      service:
+        name: kibana
+        state: started
+        enabled: yes
+
+    # Install Logstash
+    - name: Install Logstash
+      apt:
+        name: logstash
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Configure Logstash
+    - name: Configure Logstash
+      template:
+        src: logstash.conf.j2
+        dest: /etc/logstash/conf.d/logstash.conf
+        mode: 0644
+      notify: restart logstash
+
+    # Start Logstash
+    - name: Start Logstash
+      service:
+        name: logstash
+        state: started
+        enabled: yes
+
+    # Install Kali Linux
+    - name: Install Kali Linux
+      apt:
+        name: kali-linux-full
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Install DVWA
+    - name: Install DVWA
+      apt:
+        name: dvwa
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Install mod_security
+    - name: Install mod_security
+      apt:
+        name: libapache2-mod-security2
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Configure mod_security
+    - name: Configure mod_security
+      template:
+        src: modsecurity.conf.j2
+        dest: /etc/modsecurity/modsecurity.conf
+        mode: 0644
+    # Enable mod_security
+    - name: Enable mod_security
+      shell: a2enmod security2
+      args:
+        warn: no
+
+    # Restart Apache
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+        enabled: yes
+
+    # Forward DVWA logs to the ELK stack
+    - name: Forward DVWA logs to the ELK stack
+      file:
+        path: /var/log/apache2/dvwa.log
+        state: touch
+        mode: 0644
+      notify: restart logstash
+
+    # Install the Filebeat package
+    - name: Install the Filebeat package
+      apt:
+        name: filebeat
+        state: present
+        force: yes
+        cache_valid_time: 3600
+
+    # Configure Filebeat
+    - name: Configure Filebeat
+      template:
+        src: filebeat.yml.j2
+        dest: /etc/filebeat/filebeat.yml
+        mode: 0644
+      notify: restart filebeat
+
+    # Start Filebeat
+    - name: Start Filebeat
+      service:
+        name: filebeat
+        state: started
+        enabled: yes
+
+  handlers:
+    # Restart Elasticsearch
+    - name: restart elasticsearch
+      service:
+        name: elasticsearch
+        state: restarted
+
+    # Restart Kibana
+    - name: restart kibana
+      service:
+        name: kibana
+        state: restarted
+
+    # Restart Logstash
+    - name: restart logstash
+      service:
+        name: logstash
+        state: restarted
+
+    # Restart Filebeat
+    - name: restart filebeat
+      service:
+        name: filebeat
+        state: restarted
+
