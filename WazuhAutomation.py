@@ -1,7 +1,7 @@
-"""
-ChatGPT Input: 
-Write a pyton script that fetches alerts from a wazuh manager and lookup for scr ip in abuseip db  if it is reported more than 20 times then create a acl in aws security group 
-"""
+
+#ChatGPT Input: 
+#Write a pyton script that fetches alerts from a wazuh manager and lookup for scr ip in abuseip db  if it is reported more than 20 times then create a acl in aws security group 
+
 
 import requests
 import json
