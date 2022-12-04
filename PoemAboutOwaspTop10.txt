@@ -1,0 +1,39 @@
+OWASP TOP 10, a list so grand,
+Of the most common threats at hand,
+From injection to cross-site scripting,
+To broken authentication,
+
+With these ten vulnerabilities,
+Cyber attackers can cause great calamities,
+But fear not, for with the right tools and knowledge,
+We can prevent such attacks and halt their college.
+
+Injection, the first on the list,
+Can allow attackers to access your data and persist,
+Broken authentication, the second in line,
+Can give hackers access to your accounts and make you decline.
+
+Cross-site scripting, the third on the list,
+Can be used to steal your sensitive information and twist,
+Broken access controls, the fourth in the game,
+Can allow attackers to bypass your security and gain.
+
+Security misconfiguration, the fifth on the list,
+Can be exploited by attackers to gain access to your system and twist,
+Insecure cryptography, the sixth on the list,
+Can be used by hackers to decrypt your data and persist.
+
+Insufficient logging and monitoring, the seventh on the list,
+Can make it hard to detect and respond to attacks and persist,
+Cross-site request forgery, the eighth on the list,
+Can be used to trick users into performing unwanted actions and persist.
+
+Using components with known vulnerabilities, the ninth on the list,
+Can make your system vulnerable to attacks and persist,
+And last but not least, the tenth on the list,
+Is the insufficient security for APIs, which can be exploited by attackers and persist.
+
+But with the OWASP TOP 10 by our side,
+We can stay vigilant and protect our systems and pride,
+For knowledge is power, and with it we can defend,
+Against the threats and vulnerabilities that seek to harm and bend.
