@@ -15,3 +15,21 @@
   <program_name>nginx</program_name>
   <tags>Advanced-XSS</tags>
 </rule>
+
+<!-- Sure! Here's an example of a Wazuh rule in XML format that can detect time-based malicious login activity based on the time of day: -->
+<rule id="1000004" level="7">
+  <if_sid>5501</if_sid>
+  <description>Time-based malicious login attempt detected (based on time of day)</description>
+  <group>authentication_failed,attack,detection</group>
+  <options>no_tuning</options>
+  <source>any</source>
+  <destination>any</destination>
+  <content type="audit">time_based_attack=1</content>
+  <time_range>
+    <start_time>00:00</start_time>
+    <end_time>06:00</end_time>
+    <weekday>all</weekday>
+  </time_range>
+  <program_name>sshd</program_name>
+  <tags>Time-Based-Login-Attack</tags>
+</rule>
