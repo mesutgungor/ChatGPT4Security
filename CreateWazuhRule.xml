@@ -1,0 +1,17 @@
+<!-- ChatGPT Prompt : create a wazuh rule that will detect advanced xss request -->
+<rule id="1000001" level="7">
+  <if_sid>4000</if_sid>
+  <description>Advanced Cross-Site Scripting (XSS) request detected</description>
+  <group>webapp,attack,detection</group>
+  <options>no_tuning</options>
+  <source>http,server</source>
+  <destination>any</destination>
+  <content type="http_request" nocase="1">"&lt;script&gt;"</content>
+  <content type="http_request" nocase="1">"alert("</content>
+  <content type="http_request" nocase="1">"&lt;/script&gt;"</content>
+  <content type="http_request" nocase="1">"&lt;img"</content>
+  <content type="http_request" nocase="1">"&lt;svg"</content>
+  <flow>to_server,established</flow>
+  <program_name>nginx</program_name>
+  <tags>Advanced-XSS</tags>
+</rule>
